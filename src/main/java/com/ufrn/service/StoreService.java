@@ -10,14 +10,14 @@ import com.ufrn.repository.StoreRepository;
 public class StoreService {
 
 	@Autowired
-	StoreRepository repository;
+	StoreRepository repositoryS;
 	
 	public Store addStore(Store store) {
-		Store s = repository.save(store); 
+		Store s = repositoryS.save(store); 
 		return s;
 	}
 	
 	public Store getStore(long id) {
-		return repository.getById(id);
+		return repositoryS.getById(id);
 	}
 }

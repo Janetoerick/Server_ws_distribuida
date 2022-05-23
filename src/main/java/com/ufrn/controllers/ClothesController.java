@@ -1,5 +1,6 @@
 package com.ufrn.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,14 @@ public class ClothesController {
 	ClothesService clothesService;
 	
 	@PostMapping("add")
-	public ResponseEntity<Clothes> cadastrar(@RequestBody Clothes clothes) {
+	public ResponseEntity<Clothes> add(@RequestBody Clothes clothes) {
 		
 		return ResponseEntity.ok(clothesService.addClothes(clothes));
 	}
 	
-	@GetMapping("/{style}")
-	public ResponseEntity<List<Clothes>> obterPorNomeUsuario(@PathVariable(value="style") String style){
-		return ResponseEntity.ok(clothesService.getInformation(style));
+	@GetMapping("/s={style}&ds={date_start}&df={date_finish}")
+	public ResponseEntity<List<Clothes>> takeClothes(@PathVariable(value="style") String style,
+			@PathVariable(value="date_start") LocalDate start, @PathVariable(value="date_finish") LocalDate finish){
+		return ResponseEntity.ok(clothesService.getInformation(style, start, finish));
 	}
 }

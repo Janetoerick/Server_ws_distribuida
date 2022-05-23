@@ -21,8 +21,6 @@ public class Rent {
 	
 	private LocalDate date_finish;
 	
-	private long idClothes;
-	
 	public long getId() {
 		return id;
 	}
@@ -40,12 +38,6 @@ public class Rent {
 	}
 	public void setDate_finish(LocalDate date_finish) {
 		this.date_finish = date_finish;
-	}
-	public long getIdClothes() {
-		return idClothes;
-	}
-	public void setIdClothes(long idClothes) {
-		this.idClothes = idClothes;
 	}
 	
 	

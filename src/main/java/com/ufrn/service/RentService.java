@@ -1,6 +1,6 @@
 package com.ufrn.service;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +13,11 @@ import com.ufrn.repository.RentRepository;
 public class RentService {
 
 	@Autowired
-	RentRepository repository;
+	RentRepository repositoryR;
 	
 	public Rent addRent(Rent rent) {
-		Rent r = repository.save(rent); 
+		Rent r = repositoryR.save(rent); 
 		return r;
 	}
 	
-	public Optional<List<Rent>> getRentByIdClothes(long id){
-		return repository.getByIdClothes(id);
-	}
 }

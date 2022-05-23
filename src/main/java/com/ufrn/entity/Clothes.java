@@ -1,10 +1,13 @@
 package com.ufrn.entity;
 
-import javax.persistence.Column;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +25,10 @@ public class Clothes {
 	private float price;
 
 	private String NameStore;
+	
+	@ManyToMany
+	@JoinColumn(name = "id_rent")
+	private List<Rent> rents;
 
 	public long getId() {
 		return id;
@@ -62,6 +69,13 @@ public class Clothes {
 	public void setNameStore(String NameStore) {
 		this.NameStore = NameStore;
 	}
-	
+
+	public List<Rent> getRents() {
+		return rents;
+	}
+
+	public void setRents(List<Rent> rents) {
+		this.rents = rents;
+	}
 	
 }

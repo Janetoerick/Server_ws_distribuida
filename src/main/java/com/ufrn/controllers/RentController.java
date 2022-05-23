@@ -18,7 +18,7 @@ public class RentController {
 	RentService rentService;
 	
 	@PostMapping("add")
-	public ResponseEntity<Rent> cadastrar(@RequestBody Rent rent) {
+	public ResponseEntity<Rent> add(@RequestBody Rent rent) {
 		
 		return ResponseEntity.ok(rentService.addRent(rent));
 	}

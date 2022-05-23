@@ -18,7 +18,7 @@ public class StoreController {
 	StoreService storeService;
 	
 	@PostMapping("add")
-	public ResponseEntity<Store> cadastrar(@RequestBody Store store) {
+	public ResponseEntity<Store> add(@RequestBody Store store) {
 		
 		return ResponseEntity.ok(storeService.addStore(store));
 	}
