@@ -21,7 +21,7 @@ public class Clothes {
 	
 	private float price;
 
-	private long idStore;
+	private String NameStore;
 
 	public long getId() {
 		return id;
@@ -55,12 +55,12 @@ public class Clothes {
 		this.price = price;
 	}
 
-	public long getIdStore() {
-		return idStore;
+	public String getNameStore() {
+		return NameStore;
 	}
 
-	public void setIdStore(long idStore) {
-		this.idStore = idStore;
+	public void setNameStore(String NameStore) {
+		this.NameStore = NameStore;
 	}
 	
 	
