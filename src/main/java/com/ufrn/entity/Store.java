@@ -15,8 +15,7 @@ public class Store {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column
-	private String name;
+	private String name;	
 
 	public Long getId() {
 		return id;
