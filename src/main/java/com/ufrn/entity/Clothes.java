@@ -7,7 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,9 +25,11 @@ public class Clothes {
 	
 	private float price;
 
-	private String NameStore;
+	@ManyToOne
+	@JoinColumn(name = "id_store", nullable=false)
+	private Store store;
 	
-	@ManyToMany
+	@OneToMany
 	@JoinColumn(name = "id_rent")
 	private List<Rent> rents;
 
@@ -62,12 +65,12 @@ public class Clothes {
 		this.price = price;
 	}
 
-	public String getNameStore() {
-		return NameStore;
+	public Store getIdStore() {
+		return store;
 	}
 
-	public void setNameStore(String NameStore) {
-		this.NameStore = NameStore;
+	public void setIdStore(Store store) {
+		this.store = store;
 	}
 
 	public List<Rent> getRents() {

@@ -13,7 +13,7 @@ public class RentService {
 	RentRepository repositoryR;
 	
 	public Rent addRent(Rent rent) {
-		Rent r = repositoryR.save(rent); 
+		Rent r = repositoryR.save(rent);
 		return r;
 	}
 	

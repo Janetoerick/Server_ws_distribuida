@@ -21,6 +21,10 @@ public class ClothesService {
 		return c;
 	}
 	
+	public void addRent() {
+		
+	}
+	
 	public List<Clothes> getInformation(String style, LocalDate start, LocalDate finish) {
 		List<Clothes> clothes = repositoryC.findAll();
 		
