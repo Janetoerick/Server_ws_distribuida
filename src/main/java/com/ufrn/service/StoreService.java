@@ -1,8 +1,13 @@
 package com.ufrn.service;
 
+import java.util.Optional;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ufrn.Exception.EntityNotFoundException;
+import com.ufrn.entity.Clothes;
 import com.ufrn.entity.Store;
 import com.ufrn.repository.StoreRepository;
 
@@ -17,7 +22,19 @@ public class StoreService {
 		return s;
 	}
 	
-	public Store getStore(long id) {
-		return repositoryS.getById(id);
+	public Store findById(Long id) throws EntityNotFoundException {
+		
+		Optional<Store> opt = repositoryS.findById(id);
+		if(opt.isEmpty()) {
+			throw new EntityNotFoundException();
+		}else {
+//			System.out.println("-------------------------------------------------------");
+//			Set<Clothes> s = opt.get().getClothes(); 
+//			for(Clothes c: s) {
+//				System.out.println(c.getId());
+//			}
+//			
+			return opt.get();
+		}
 	}
 }
