@@ -59,6 +59,9 @@ public class ClothesService {
 		return clothes;
 	}
 	
+	public void deleteById(Long id) {
+		repositoryC.deleteById(id);
+	}
 	
 
 }

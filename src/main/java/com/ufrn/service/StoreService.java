@@ -35,5 +35,8 @@ public class StoreService {
 		}
 	}
 	
+	public void deleteById(Long id) {
+		repositoryS.deleteById(id);
+	}
 	
 }
