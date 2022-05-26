@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ufrn.Exception.EntityNotFoundException;
+import com.ufrn.Exception.NullDataException;
 import com.ufrn.entity.Clothes;
 import com.ufrn.entity.Rent;
+import com.ufrn.entity.Store;
 import com.ufrn.repository.ClothesRepository;
 
 @Service
@@ -29,29 +31,36 @@ public class ClothesService {
 		if(opt.isEmpty()) {
 			throw new EntityNotFoundException();
 		}else {
+			System.out.println("-------------------------------------------------");
+			System.out.println(opt.get().getStore().getName());
 			return opt.get();
 		}
 		
+		
 	}
 	
-	public List<Clothes> getInformation(String style, LocalDate start, LocalDate finish) {
+	public List<Clothes> getClothesForStyleAll(String style, LocalDate start, LocalDate finish) throws NullDataException {
 		List<Clothes> clothes = repositoryC.findAll();
-//		for(Clothes c: clothes) {
-//			if(c.getStyle() != style) {
-//				clothes.remove(c);
-//			} else {
-//				for(Rent r: c.getRents()) {
-//					if(!(r.getDate_finish().isBefore(start)
-//							|| r.getDate_start().isAfter(finish))) {
-//					} else {
-//						clothes.remove(c);
-//						break;
-//					}
-//				}
-//			}
-//		}
-		
+
+		for(Clothes c: repositoryC.findAll()) {
+			if(!c.getStyle().contains(style)) {
+				clothes.remove(c);
+			} else {
+				for(Rent r: c.getRents()) {
+					if(!(r.getDate_finish().isBefore(start)
+							|| r.getDate_start().isAfter(finish))) {
+						clothes.remove(c);
+						break;
+					}
+				}
+			}
+		}
+		if(clothes.isEmpty()) {
+			throw new NullDataException();
+		}
 		return clothes;
 	}
+	
+	
 
 }
