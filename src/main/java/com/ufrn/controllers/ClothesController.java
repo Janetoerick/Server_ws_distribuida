@@ -42,7 +42,7 @@ public class ClothesController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Date not found");
 		} else {
 			try {
-				return ResponseEntity.ok(clothesService.getClothesForStyleAll(style, Dstart, Dfinish));
+				return ResponseEntity.ok(clothesService.findClothesForStyleAll(style, Dstart, Dfinish));
 			} catch (NullDataException e) {
 				 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("List of clothes its null");
 			}
@@ -52,8 +52,13 @@ public class ClothesController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Clothes> takeClothes(@PathVariable Long id) throws EntityNotFoundException{
+	public ResponseEntity<?> findClothes(@PathVariable Long id) throws EntityNotFoundException{
 		
-		return ResponseEntity.ok(clothesService.findById(id));
+		try {
+			return ResponseEntity.ok(clothesService.findById(id));
+		} catch (EntityNotFoundException e){
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Clothes not exist");
+		}
+		
 	}
 }

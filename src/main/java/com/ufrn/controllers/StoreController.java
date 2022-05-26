@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,9 +33,13 @@ public class StoreController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Store> takeClothes(@PathVariable Long id) throws EntityNotFoundException{
+	public ResponseEntity<?> findClothes(@PathVariable Long id) throws EntityNotFoundException{
+		try {
+			return ResponseEntity.ok(storeService.findById(id));
+		} catch (EntityNotFoundException e){
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Store not exist");
+		}
 		
-		return ResponseEntity.ok(storeService.findById(id));
 	}
 	
 }

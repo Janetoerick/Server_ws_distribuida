@@ -31,12 +31,6 @@ public class StoreService {
 		if(opt.isEmpty()) {
 			throw new EntityNotFoundException();
 		}else {
-//			System.out.println("-------------------------------------------------------");
-//			Set<Clothes> s = opt.get().getClothes(); 
-//			for(Clothes c: s) {
-//				System.out.println(c.getId());
-//			}
-//			
 			return opt.get();
 		}
 	}

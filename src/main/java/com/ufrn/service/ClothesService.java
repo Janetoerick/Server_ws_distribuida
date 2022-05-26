@@ -37,7 +37,7 @@ public class ClothesService {
 		
 	}
 	
-	public List<Clothes> getClothesForStyleAll(String style, LocalDate start, LocalDate finish) throws NullDataException {
+	public List<Clothes> findClothesForStyleAll(String style, LocalDate start, LocalDate finish) throws NullDataException {
 		List<Clothes> clothes = repositoryC.findAll();
 
 		for(Clothes c: repositoryC.findAll()) {
