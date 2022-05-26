@@ -31,8 +31,6 @@ public class ClothesService {
 		if(opt.isEmpty()) {
 			throw new EntityNotFoundException();
 		}else {
-			System.out.println("-------------------------------------------------");
-			System.out.println(opt.get().getStore().getName());
 			return opt.get();
 		}
 		
