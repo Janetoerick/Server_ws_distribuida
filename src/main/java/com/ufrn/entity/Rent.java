@@ -23,6 +23,8 @@ public class Rent {
 	
 	private LocalDate date_finish;
 	
+	private float price;
+	
 	@ManyToOne
 	@JoinColumn(name="clothes_id", nullable=false)
     private Clothes clothes;
@@ -50,6 +52,12 @@ public class Rent {
 	}
 	public void setClothes(Clothes clothes) {
 		this.clothes = clothes;
+	}
+	public float getPrice() {
+		return price;
+	}
+	public void setPrice(float price) {
+		this.price = price;
 	}
 	
 	
