@@ -9,6 +9,7 @@ import com.ufrn.repository.ClothesRepository;
 import com.ufrn.repository.RentRepository;
 
 import java.time.temporal.ChronoUnit;
+import java.util.Optional;
 
 @Service
 public class RentService {
@@ -16,10 +17,15 @@ public class RentService {
 	@Autowired
 	RentRepository repositoryR;
 	
+	@Autowired
+	ClothesRepository repositoryC;
+	
 	public Rent addRent(Rent rent) {
 		
+		Optional<Clothes> c = repositoryC.findById(rent.getClothes().getId());
+		
 		int days = (int) ChronoUnit.DAYS.between(rent.getDate_start(), rent.getDate_finish()) + 1;
-		rent.setPrice(rent.getClothes().getPrice()*days);
+		rent.setPrice(c.get().getPrice()*days);
 		
 		Rent r = repositoryR.save(rent);
 		return r;

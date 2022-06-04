@@ -1,16 +1,11 @@
 package com.ufrn.service;
 
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ufrn.Exception.EntityNotFoundException;
-import com.ufrn.entity.Clothes;
-import com.ufrn.entity.Rent;
 import com.ufrn.entity.Store;
 import com.ufrn.repository.StoreRepository;
 

@@ -11,7 +11,6 @@ import com.ufrn.Exception.EntityNotFoundException;
 import com.ufrn.Exception.NullDataException;
 import com.ufrn.entity.Clothes;
 import com.ufrn.entity.Rent;
-import com.ufrn.entity.Store;
 import com.ufrn.repository.ClothesRepository;
 
 @Service
