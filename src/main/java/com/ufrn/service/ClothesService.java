@@ -1,6 +1,7 @@
 package com.ufrn.service;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +40,7 @@ public class ClothesService {
 	public List<Clothes> findClothesForStyleAll(String style, LocalDate start, LocalDate finish) throws NullDataException {
 		List<Clothes> clothes = repositoryC.findAll();
 
+		boolean its_ok = true;
 		for(Clothes c: repositoryC.findAll()) {
 			if(!c.getStyle().contains(style)) {
 				clothes.remove(c);
@@ -47,9 +49,16 @@ public class ClothesService {
 					if(!(r.getDate_finish().isBefore(start)
 							|| r.getDate_start().isAfter(finish))) {
 						clothes.remove(c);
+						its_ok = false;
 						break;
 					}
 				}
+				if(its_ok) {
+					int days = (int) ChronoUnit.DAYS.between(start, finish) + 1;
+					float a = c.getPrice() * days;
+					c.setPrice(a);
+				}
+				its_ok = true;
 			}
 		}
 		if(clothes.isEmpty()) {

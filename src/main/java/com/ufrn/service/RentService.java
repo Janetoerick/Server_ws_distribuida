@@ -3,6 +3,7 @@ package com.ufrn.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ufrn.Exception.EntityNotFoundException;
 import com.ufrn.entity.Clothes;
 import com.ufrn.entity.Rent;
 import com.ufrn.repository.ClothesRepository;
@@ -16,19 +17,28 @@ public class RentService {
 
 	@Autowired
 	RentRepository repositoryR;
-	
+
 	@Autowired
 	ClothesRepository repositoryC;
-	
+
 	public Rent addRent(Rent rent) {
-		
+
 		Optional<Clothes> c = repositoryC.findById(rent.getClothes().getId());
-		
+
 		int days = (int) ChronoUnit.DAYS.between(rent.getDate_start(), rent.getDate_finish()) + 1;
-		rent.setPrice(c.get().getPrice()*days);
-		
+		rent.setPrice(c.get().getPrice() * days);
+
 		Rent r = repositoryR.save(rent);
 		return r;
 	}
-	
+
+	public Rent findById(Long id) throws EntityNotFoundException {
+		Optional<Rent> opt = repositoryR.findById(id);
+		if (opt.isEmpty()) {
+			throw new EntityNotFoundException();
+		} else {
+			return opt.get();
+		}
+	}
+
 }
