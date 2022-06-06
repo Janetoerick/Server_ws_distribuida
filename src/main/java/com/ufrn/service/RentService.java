@@ -23,10 +23,10 @@ public class RentService {
 
 	public Rent addRent(Rent rent) {
 
-		Optional<Clothes> c = repositoryC.findById(rent.getClothes().getId());
+		Optional<Clothes> c = repositoryC.findById(rent.getClothes().getId()); // pega a loja que eh mencionada  (pelo id)
 
-		int days = (int) ChronoUnit.DAYS.between(rent.getDate_start(), rent.getDate_finish()) + 1;
-		rent.setPrice(c.get().getPrice() * days);
+		int days = (int) ChronoUnit.DAYS.between(rent.getDate_start(), rent.getDate_finish()) + 1; // quantos dias tem de diferenca
+		rent.setPrice(c.get().getPrice() * days); // calcula o preco total do aluguel a partir do preco diario mencionado da roupa
 
 		Rent r = repositoryR.save(rent);
 		return r;
@@ -34,7 +34,7 @@ public class RentService {
 
 	public Rent findById(Long id) throws EntityNotFoundException {
 		Optional<Rent> opt = repositoryR.findById(id);
-		if (opt.isEmpty()) {
+		if (opt.isEmpty()) { // verificando se existe aluguel com o id mencionado
 			throw new EntityNotFoundException();
 		} else {
 			return opt.get();

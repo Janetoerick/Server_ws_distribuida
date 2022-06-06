@@ -39,9 +39,10 @@ public class ClothesController {
 		LocalDate Dfinish = LocalDate.parse(finish);
 		
 	
-		if(Dstart.isAfter(Dfinish)) {
+		// verificando se as datas são válidas
+		if(Dstart.isAfter(Dfinish)) { // caso a data inicial seja depois da final retorna Date not found
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Date not found");
-		} else {
+		} else { // qualquer outro caso, passa
 			try {
 				return ResponseEntity.ok(clothesService.findClothesForStyleAll(style, Dstart, Dfinish));
 			} catch (NullDataException e) {
@@ -53,7 +54,7 @@ public class ClothesController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> findClothes(@PathVariable Long id) throws EntityNotFoundException{
+	public ResponseEntity<?> findClothesById(@PathVariable Long id) throws EntityNotFoundException{
 		
 		try {
 			return ResponseEntity.ok(clothesService.findById(id));

@@ -27,7 +27,7 @@ public class RentController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> findClothes(@PathVariable Long id) throws EntityNotFoundException{
+	public ResponseEntity<?> findRent(@PathVariable Long id) throws EntityNotFoundException{
 		
 		try {
 			return ResponseEntity.ok(rentService.findById(id));

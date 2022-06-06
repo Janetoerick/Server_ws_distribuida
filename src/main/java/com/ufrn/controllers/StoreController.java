@@ -30,7 +30,7 @@ public class StoreController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> findStore(@PathVariable Long id) throws EntityNotFoundException{
+	public ResponseEntity<?> findStoreById(@PathVariable Long id) throws EntityNotFoundException{
 		try {
 			return ResponseEntity.ok(storeService.findById(id));
 		} catch (EntityNotFoundException e){

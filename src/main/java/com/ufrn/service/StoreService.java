@@ -23,7 +23,7 @@ public class StoreService {
 	public Store findById(Long id) throws EntityNotFoundException {
 		
 		Optional<Store> opt = repositoryS.findById(id);
-		if(opt.isEmpty()) {
+		if(opt.isEmpty()) { // verificando se existe a loja com o id mencionado
 			throw new EntityNotFoundException();
 		}else {
 			return opt.get();

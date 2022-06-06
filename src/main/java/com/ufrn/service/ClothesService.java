@@ -28,7 +28,7 @@ public class ClothesService {
 	public Clothes findById(Long id) throws EntityNotFoundException {
 		
 		Optional<Clothes> opt = repositoryC.findById(id);
-		if(opt.isEmpty()) {
+		if(opt.isEmpty()) { // verificando se existe roupa com o id mencionado
 			throw new EntityNotFoundException();
 		}else {
 			return opt.get();
@@ -38,30 +38,30 @@ public class ClothesService {
 	}
 	
 	public List<Clothes> findClothesForStyleAll(String style, LocalDate start, LocalDate finish) throws NullDataException {
-		List<Clothes> clothes = repositoryC.findAll();
+		List<Clothes> clothes = repositoryC.findAll(); //pegando todas as roupas do banco
 
-		boolean its_ok = true;
+		boolean its_ok = true; // variavel auxiliar para calcular ou nao o preço total do periodo
 		for(Clothes c: repositoryC.findAll()) {
-			if(!c.getStyle().contains(style)) {
+			if(!c.getStyle().contains(style)) { // caso o estilo nao coincida remove a roupa da lista
 				clothes.remove(c);
 			} else {
 				for(Rent r: c.getRents()) {
 					if(!(r.getDate_finish().isBefore(start)
-							|| r.getDate_start().isAfter(finish))) {
-						clothes.remove(c);
+							|| r.getDate_start().isAfter(finish))) { // caso tenha algum aluguel com data no periodo
+						clothes.remove(c);							 // remove a roupa
 						its_ok = false;
 						break;
 					}
 				}
-				if(its_ok) {
-					int days = (int) ChronoUnit.DAYS.between(start, finish) + 1;
-					float a = c.getPrice() * days;
-					c.setPrice(a);
+				if(its_ok) { // caso a roupa esteja nas especificacoes para retorno
+					int days = (int) ChronoUnit.DAYS.between(start, finish) + 1; // quantos dias tem de diferenca
+					float a = c.getPrice() * days; // calcula o preco total
+					c.setPrice(a); 
 				}
 				its_ok = true;
 			}
 		}
-		if(clothes.isEmpty()) {
+		if(clothes.isEmpty()) { // caso nao haja roupa que atenda as especificacoes
 			throw new NullDataException();
 		}
 		return clothes;
